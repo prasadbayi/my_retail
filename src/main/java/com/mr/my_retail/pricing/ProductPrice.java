@@ -1,14 +1,9 @@
 package com.mr.my_retail.pricing;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-@Entity
 public class ProductPrice {
 
 	@Id
-	@GeneratedValue
 	private Long id;
 	private Double value;
 	private String currency_code;
