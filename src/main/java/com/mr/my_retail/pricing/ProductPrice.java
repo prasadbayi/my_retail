@@ -1,8 +1,10 @@
 package com.mr.my_retail.pricing;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
-public class ProductPrice {
 
+@Entity
+public class ProductPrice {
 	@Id
 	private Long id;
 	private Double value;

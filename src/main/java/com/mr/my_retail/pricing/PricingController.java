@@ -35,19 +35,19 @@ public class PricingController {
 	}
 
 	@PostMapping("/add_product")
-	ResponseEntity<Object> addProduct(@RequestBody ProductPrice newPrice) {
+	public ResponseEntity<Object> addProduct(@RequestBody ProductPrice newPrice) {
 		log.debug("PricingController.addProduct() Creating new product price, for Product id = "+newPrice.getId());
 		return pricingService.addProduct(newPrice);
 	}
 
 	@PutMapping("/update_product/{id}")
-	ResponseEntity<Object> updateProduct(@RequestBody ProductPrice price, @PathVariable Long id) {
+	public ResponseEntity<Object> updateProduct(@RequestBody ProductPrice price, @PathVariable Long id) {
 		log.debug("PricingController.updateProduct() Updating product price, for id = "+id);
 		return pricingService.updateProduct(price, id);
 	}
 
 	@DeleteMapping("/delete_product/{id}")
-	void deleteProduct(@PathVariable Long id) {
+	public void deleteProduct(@PathVariable Long id) {
 		log.debug("PricingController.deleteProduct() deleting product price, for id = "+id);
 		pricingService.deleteProduct(id);
 	}
