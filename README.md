@@ -1,6 +1,8 @@
 # My Retail
  My Retail
 
+Dependency
+==========
 myRetail has a dependency on Catalog of Products (External) - https://github.com/prasadbayi/catalog_ext.
 
 GET	http://localhost:8080/my_retail/products/{id}
