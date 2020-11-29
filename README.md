@@ -3,7 +3,7 @@
 
 Dependency
 ==========
-myRetail has a dependency on Catalog of Products (External) - https://github.com/prasadbayi/catalog_ext.
+myRetail has a dependency on Catalog of Products (External) for /my_retail/products endpoint at - https://github.com/prasadbayi/catalog_ext.
 
 GET	http://localhost:8080/my_retail/products/{id}
 ================================================
