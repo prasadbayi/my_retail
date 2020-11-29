@@ -1,15 +1,22 @@
 package com.mr.my_retail.pricing;
 
-
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class ProductPrice {
+@Entity
+@Table(name="product_price_dao")
+public class ProductPriceDAO {
 	@Id
-	private Long id;
-	private Double value;
-	private String currency_code;
+	protected Long id;
+	protected Double value;
+	protected String currency_code;
 	
-	public ProductPrice(Long id, Double value, String currencyCode) {
+	public ProductPriceDAO() {
+		
+	}
+	
+	public ProductPriceDAO(Long id, Double value, String currencyCode) {
 		super();
 		this.id = id;
 		this.value = value;
@@ -35,3 +42,4 @@ public class ProductPrice {
 		this.currency_code = currency_code;
 	}
 }
+

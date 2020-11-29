@@ -17,17 +17,17 @@ public class PricingService {
 	@Autowired
 	private PricingRepository pricingRepository;
 
-	public ProductPrice getProducts(Long id) {
+	public ProductPriceDAO getProducts(Long id) {
 		log.debug("PricingService.getProducts() Fetching current_price Details for the given Proudct = " + id);
 		
-		Optional<ProductPrice> pricing = pricingRepository.findById(id);
+		Optional<ProductPriceDAO> pricing = pricingRepository.findById(id);
 		if (!pricing.isPresent())
 			throw new PricingNotFoundException("id-" + id);
 
 		return pricing.get();
 	}
 	
-	public Iterable<ProductPrice> getProducts() {
+	public Iterable<ProductPriceDAO> getProducts() {
 		log.debug("PricingService.getProducts() Fetching all product pricing Details");
 		return pricingRepository.findAll();
 	}
@@ -35,7 +35,7 @@ public class PricingService {
 	ResponseEntity<Object> addProduct(ProductPrice newPrice) {
 		log.debug("PricingService.addProduct() Creating new product price, for Product id = "+newPrice.getId());
 
-		ProductPrice savedPricing = pricingRepository.save(newPrice);
+		ProductPriceDAO savedPricing = pricingRepository.save(new ProductPriceDAO(newPrice.getId(),newPrice.getValue(), newPrice.getCurrency_code()));
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedPricing.getId()).toUri();
@@ -46,13 +46,18 @@ public class PricingService {
 	ResponseEntity<Object> updateProduct(ProductPrice price, Long id) {
 		log.debug("PricingService.updateProduct() Updating product price, for id = "+id);
 	
-		Optional<ProductPrice> pricingOptional = pricingRepository.findById(id);
+		Optional<ProductPriceDAO> pricingOptional = pricingRepository.findById(id);
 
 		if (!pricingOptional.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		price.setId(id);
-		pricingRepository.save(price);
+		
+		ProductPriceDAO prodPriceDAO = pricingOptional.orElseGet(() -> new ProductPriceDAO());
+		
+		prodPriceDAO.setId(id);
+		prodPriceDAO.setValue(price.getValue());
+		prodPriceDAO.setCurrency_code(price.getCurrency_code());
+		pricingRepository.save(prodPriceDAO);
 
 		return ResponseEntity.noContent().build();
 	}

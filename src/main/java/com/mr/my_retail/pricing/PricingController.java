@@ -23,13 +23,13 @@ public class PricingController {
 	private PricingService pricingService;
 
 	@GetMapping("/products/{id}")
-	public ProductPrice getProducts(@PathVariable Long id) {
+	public ProductPriceDAO getProducts(@PathVariable Long id) {
 		log.debug("PricingController.getProducts() Fetching current_price Details for the given Proudct = " + id);
 		return pricingService.getProducts(id);
 	}
 	
 	@GetMapping("/products")
-	public Iterable<ProductPrice> getProducts() {
+	public Iterable<ProductPriceDAO> getProducts() {
 		log.debug("PricingController.getProducts() Fetching all product pricing Details");
 		return pricingService.getProducts();
 	}

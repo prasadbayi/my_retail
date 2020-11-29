@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.mr.my_retail.pricing.ProductPrice;
+import com.mr.my_retail.pricing.ProductPriceDAO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MyRetailApplication.class)
@@ -25,7 +25,7 @@ import com.mr.my_retail.pricing.ProductPrice;
 class MyRetailControllerTest {
 		private static final String USD = "USD";
 
-		private static ProductPrice mockProduct = new ProductPrice(new Long(15117729), new Double(15), USD);
+		private static ProductPriceDAO mockProduct = new ProductPriceDAO(new Long(15117729), new Double(15), USD);
 
 		@Autowired
 		private MockMvc mockMvc;
@@ -36,7 +36,7 @@ class MyRetailControllerTest {
 		@Test
 		void testGetProductById() {
 			try {
-				ProductPrice mockProductPrice = new ProductPrice(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
+				ProductPriceDAO mockProductPrice = new ProductPriceDAO(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
 				Product.current_price current_price = new Product.current_price(mockProductPrice.getValue(),mockProductPrice.getCurrency_code());
 				Product product = new Product(mockProduct.getId(), "", current_price);
 				

@@ -67,7 +67,7 @@ class PricingControllerTest {
 	@Test
 	void testGetProductById() {
 		try {
-			ProductPrice mockProductPrice = new ProductPrice(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
+			ProductPriceDAO mockProductPrice = new ProductPriceDAO(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
 			
 			Mockito.when(pricingRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(mockProductPrice));
 
@@ -104,7 +104,7 @@ class PricingControllerTest {
 	void testUpdateProduct() {
 		try {
 		
-			ProductPrice mockProductPrice = new ProductPrice(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
+			ProductPriceDAO mockProductPrice = new ProductPriceDAO(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
 			
 			Mockito.when(pricingRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(mockProductPrice));
 
@@ -140,9 +140,9 @@ class PricingControllerTest {
 	@Test
 	void testAddProduct() {
 		try {
-			ProductPrice mockProductPrice = new ProductPrice(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
+			ProductPriceDAO mockProductPrice = new ProductPriceDAO(mockProduct.getId(), mockProduct.getValue(), mockProduct.getCurrency_code());
 			
-			Mockito.when(pricingRepository.save(Mockito.any(ProductPrice.class))).thenReturn(mockProductPrice);
+			Mockito.when(pricingRepository.save(Mockito.any(ProductPriceDAO.class))).thenReturn(mockProductPrice);
 
 			RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/pricing/add_product/")
 					.contentType("application/json").content(mapToJson(mockProduct));

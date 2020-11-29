@@ -24,8 +24,6 @@ public class MyRetailService {
 	}
 
 	public Product getProducts(Long id) {
-		// Example response: {"id":13860428,"name":"The Big Lebowski (Blu-ray)
-		// (Widescreen)","current_price":{"value": 13.49,"currency_code":"USD"}}
 		log.debug("MyRetailService.getProducts():: Fetching Proudct details for id = " + id);
 
 		Product responseBody = getProduct(id);
@@ -43,7 +41,7 @@ public class MyRetailService {
 			URL url = new URL(urlString);
 			endpoint = url.toString();
 		} catch (Exception e) {
-			log.error("MyRetailService.getProduct()" + e.getStackTrace().toString());
+			log.error("MyRetailService.getProduct()" + e.getMessage());
 		}
 		Product responseBody = restTemplate.getForObject(endpoint, Product.class);
 		return responseBody;
@@ -56,7 +54,7 @@ public class MyRetailService {
 			URL url = new URL(urlString);
 			endpoint = url.toString();
 		} catch (Exception e) {
-			log.error("MyRetailService.getCurrentPrice()" + e.getStackTrace().toString());
+			log.error("MyRetailService.getCurrentPrice()" + e.getMessage());
 		}
 		final Product.current_price current_price = restTemplate.getForObject(endpoint, Product.current_price.class);
 		return current_price;
